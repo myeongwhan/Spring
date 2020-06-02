@@ -113,6 +113,7 @@
 		</dependency>
 	
 		<!-- Test -->
+		<!-- 프로그램이 정상적으로 작동하는지 테스트하는 용도 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

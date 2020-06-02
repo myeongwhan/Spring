@@ -36,17 +36,19 @@ day02
 		
 		
 스프링에 MVC 프로젝트 생성
-	1. 서블릭 등록
+	1. 서블릿 등록
 	
 		WEB-INF/web.xml에서 작업한다
 		
 		<servlet>
 		<servlet-name>appServlet</servlet-name>
 		==> 만드는 서블릿의 부여하는 이름을 정하는 태그
+		
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		==> 이 서블릿에서 사용할 클래스를 지정하는 태그
 			JSP프로젝트에서는 먼저 서블릿 클래스를 만들어 등록하고 작업을 했지만
 			스프링에서는 미리 만들어진 서블릿을 사용하면 된다
+			
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
@@ -55,11 +57,12 @@ day02
 			xml파일을 지정하는 부분
 			<파일이름은 자유롭게 번경 가능하다
 			단, 해당 경로에 반드시 동일한 이름의 파일이 존재해야 한다
+			
 		<load-on-startup>2</load-on-startup>
 		==> 서블릿이 행동할 웃헌순위를 지정하는 태그
 			우리는 .cls로 요청되는 요청을 우선 처리하기로 했으므로
 			이 서블릿은 우선순위를 두번째로 변경을 했다
-	</servlet>
+		</servlet>
 		
 	참고]
 		하나의 프로젝트에 서블릿은 여러 개 만들 수 있다

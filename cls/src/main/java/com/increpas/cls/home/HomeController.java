@@ -1,4 +1,4 @@
-package com.increpas.cls;
+package com.increpas.cls.home;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, String id) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -38,9 +38,14 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+	/*
 	@RequestMapping("/main")
 	public String getMain(ModelAndView mv) {
-		return "main";
+		return null;
+	}
+	*/
+	@RequestMapping("/main")
+	public void getMain(ModelAndView mv) {
+		return ;
 	}
 }

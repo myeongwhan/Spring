@@ -117,7 +117,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.13</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -139,6 +139,7 @@
 		    <version>1.4</version>
 		</dependency>
 		<!-- Oracle Driver Setting -->
+		<!-- 
 		<dependency>
 		    <groupId>com.oracle</groupId>
 		    <artifactId>OracleDriver</artifactId>
@@ -146,6 +147,7 @@
 		    <scope>system</scope>
 		    <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
 		</dependency>
+		 -->
 		
 		<!-- myBatis Setting -->
 		<dependency>

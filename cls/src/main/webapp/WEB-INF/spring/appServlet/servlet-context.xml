@@ -27,8 +27,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.increpas.cls" />
-	
-	
-	
+	<context:component-scan base-package="com.increpas.cls.home" />
+	<!-- 스캔할 패키지 트리 최상위(.home 하위만 스캔하여 빈 등록) -->
 </beans:beans>

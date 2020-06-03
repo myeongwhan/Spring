@@ -19,6 +19,9 @@
 		$('#obtn').click(function(){
 			$(location).attr('href', '/cls/member/logout.cls');
 		});
+		$('#mlbtn').click(function(){
+			$(location).attr('href', '/cls/member/memberList.cls');
+		});
 	});
 </script>
 </head>
@@ -31,6 +34,7 @@
 			</c:if>
 			<c:if test="${not empty SID }">
 			<div class="w3-button w3-blue w3-hover-aqua" id="obtn">Logout</div>
+			<div class="w3-button w3-indigo w3-hover-blue" id="mlbtn">MemberList</div>
 			</c:if>
 		</div>
 	</div>

@@ -1,0 +1,16 @@
+# 회원 리스트 페이지 보기 요청
+
+	요청내용	:	/cls/member/memberList.cls
+	파라미터	:	무(숙제: 로그인한 회원에 한해서 처리하도록 해주세요)
+	컨트롤러	:	com.increpas.cls.controller.member.Member
+	처리함수	:	Member.getList()
+	뷰		:	/WEB-INF/views/member/memberList.jsp
+-------------------------------------------------------------
+# 회원 상세정보 페이지 보기 요청
+
+	요청내용	:	/cls/member/memberDetail.cls
+	파라미터	:	mno, name
+	컨트롤러	:	com.increpas.cls.controller.member.Member
+	처리함수	:	Member.getDetail()
+	뷰		:	/WEB-INF/views/member/memberDetail.jsp
+-------------------------------------------------------------

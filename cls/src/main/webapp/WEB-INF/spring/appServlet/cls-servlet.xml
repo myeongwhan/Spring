@@ -15,6 +15,11 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	<!-- 
+		mvc 스키마에서 정의해놓은 태그
+		루트경로 하위의 모든 클래스를 스캔한 후
+		어노테이션이 붙어있는 태그를 빈처리하는 태그
+	 -->
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
@@ -23,6 +28,25 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<!-- 뷰 우선순위 설정 -->
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<!-- 
+		뷰의 실행 우선순위를 지정하는 부분이다
+		스프링은 컨트롤러가 반환값을 주지 않아도
+		자동 뷰가 실행된다( ==> 요청 이름을 이용해서 뷰가 정해진다)
+		
+		문제점]
+			뷰를 다른 뷰로 선택하더라도 자동 뷰가 있다
+		
+		해결책]
+			뷰의 우선순위를 두어서 어떤 뷰가 먼저 실행될지를 지정하게 된다
+			일반 뷰는 우선순위가 1로 자동으로 지정된다
+			지금처럼 만드는 뷰(요청)는 우선순위를 1보다 앞선 순위로 지정하여
+			자동 뷰가 실행되지 않도록 해주면 되겠다
+	 -->
+		<beans:property name="order" value="0" />
 	</beans:bean>
 	
 	<!-- dao bean처리 -->
@@ -30,5 +54,15 @@
 	
 	<context:component-scan base-package="com.increpas.cls" />
 	<!-- 스캔할 패키지 트리 최상위 -->
+	<!-- 
+		특정 패키지 안의 클래스들을 스캔하고
+		어노테이션을 확인한 후 빈처리를 한다
+		
+		참고]
+			<context:annotation-config>
+			이미 등록된(빈처리된) bean들의 Annotation을 활성화시키기 위한 태그
+			(컨트롤러에서 Autowired로 활성화됨)
+			==> 이 태그는 bean을 등록하는 작업을 하지 않는다
+	 -->
 	
 </beans:beans>

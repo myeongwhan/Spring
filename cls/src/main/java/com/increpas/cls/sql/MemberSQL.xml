@@ -58,4 +58,14 @@
 	<select id="idCount" resultType="int" parameterType="string">
 		<include refid="selCNT" /> #{id}
 	</select>
+	
+	<!-- resultType은 한 줄 데이터를 담을 (mybatis의)데이터타입만 생각해서 적으면 됨 -->
+	<select id="nameList" resultType="mVO">
+		SELECT
+			mno, name
+		FROM
+			member
+		WHERE
+			isshow = 'Y'
+	</select>
 </mapper>

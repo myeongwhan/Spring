@@ -1,5 +1,8 @@
 package com.increpas.cls.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,5 +23,10 @@ public class MemberDAO {
 	// 로그인 질의명령 전담처리함수
 	public int login(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.Login", mVO);
+	}
+	
+	// 회원 버튼 리스트 가져오기 전담처리함수
+	public List<MemberVO> getList() {
+		return sqlSession.selectList("mSQL.nameList");
 	}
 }

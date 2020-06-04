@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -135,6 +136,41 @@ public class Member {
 		// 3. 뷰도 넘겨주고
 		mv.setViewName(view);
 		return mv;
+	}
+	
+	// 회원 상세정보 요청 처리 함수
+	@RequestMapping("/memberDetail.cls")
+	public ModelAndView getDetail(HttpSession session, ModelAndView mv, int mno) {
+		// 먼저 로그인 되어있는지 확인하고
+		if(session.getAttribute("SID") == null) {
+			RedirectView rd = new RedirectView("/cls/member/login.cls");
+			mv.setView(rd);
+			return mv;
+		}
+		
+		// 할일
+		// 데이터는 이미 매개변수에서 받아왔으므로
+		// db처리만 해주고 데이터 받아서 뷰에 넘기면 된다
+		
+		// 데이터 심고
+		MemberVO mVO = mDAO.getDetail(mno);
+		mv.addObject("DATA", mVO);
+		// 뷰 심고
+		mv.setViewName("member/memberDetail");
+		return mv;
+	}
+	
+	// 회원 상세정보 요청 처리 비동기통신 함수
+	@RequestMapping("/mDetail.cls")
+	@ResponseBody	//	==> 반환값을 여기에 채우라는 어노테이션. json문서 자동으로 만들어줌
+	public MemberVO mDetail(HttpSession session, MemberVO mVO) {
+		// 먼저 로그인 되어있는지 확인하고
+		if(session.getAttribute("SID") == null) {
+			mVO.setStatus("No");
+		}
+		mVO = mDAO.getDetail(mVO.getMno());
+		mVO.setSdate();
+		return mVO;
 	}
 	
 	// w3.css 컬러 클래스 리스트 반환함수

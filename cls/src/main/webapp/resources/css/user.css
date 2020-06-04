@@ -75,5 +75,9 @@ html, body {
 }
 .pd-left-80 {
 	padding-left: 80px;
-	
+}
+.f16 {
+	color: gray;
+	font-size: 16pt;
+	font-weight: bold;
 }

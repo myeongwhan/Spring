@@ -12,14 +12,50 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		/*
 		$('.btn').click(function(){
 			var sno = $(this).attr('id');
 			
-			alert(sno);
-			/*
+			//alert(sno);
 			$('#mno').val(sno);
 			$('#frm').submit();
-			*/
+		});
+		*/
+		
+		// 회원정보 가져오기 비동기통신
+		$('.btn').click(function(){
+			var sno = $(this).attr('id');
+			
+			$.ajax({
+				url: '/cls/member/mDetail.cls',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'mno': sno
+				},
+				success: function(obj){
+					if(obj.status == 'No'){
+						alert('로그인하세요');
+						return;
+					}
+					
+					document.getElementById('wmno').innerHTML = obj.mno;
+					//$('#wmno').text(obj.mno);
+					document.getElementById('avatar').setAttribute('src', '/cls/img/' + obj.avatar);
+					//$('#avatar').attr('src', '/cls/img/' + obj.avatar);
+					$('#id').text(obj.id);
+					$('#name').text(obj.name);
+					$('#tel').text(obj.tel);
+					$('#gen').text(obj.gen);
+					$('#mail').text(obj.mail);
+					$('#jdate').text(obj.sdate);
+					
+					$('#detail').css('display', '');
+				},
+				error: function(){
+					alert('# 통신에러 #');
+				}
+			});
 		});
 	});
 </script>
@@ -35,6 +71,43 @@
 					<div class="w3-card-4 w3-button w3-margin-bottom ${COLOR.get(st.index) } w-150 btn" id="${data.mno }">${data.name }</div>
 				</c:forEach>
 			</div>
+	</div>
+	
+	<div class="w3-content mxw" id="detail" style="display: none;">
+		<h2 class="w3-light-green w3-center w3-padding w3-card-4"><span id="ttl"></span> 회원정보</h2>
+		<div class="w3-col w3-padding w3-card-4">
+			<div class="w3-border-bottom w3-center">
+				<img class="w3-border w3-circle w3-card pd-20 w-200" src="/cls/img/" id="avatar">
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">회원번호: </div>
+				<div class="w3-rest f16" id="wmno"></div>
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">회원이름: </div>
+				<div class="w3-rest f16" id="name"></div>
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">회원계정: </div>
+				<div class="w3-rest f16" id="id"></div>
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">회원메일: </div>
+				<div class="w3-rest f16" id="mail"></div>
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">전화번호: </div>
+				<div class="w3-rest f16" id="tel"></div>
+			</div>
+			<div class="w3-border-bottom">
+				<div class="w3-col w-200 f16">회원성별: </div>
+				<div class="w3-rest f16" id="gen"></div>
+			</div>
+			<div class="w3-border-bottom w3-margin-bottom">
+				<div class="w3-col w-200 f16">가입일자: </div>
+				<div class="w3-rest f16" id="jdate"></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

@@ -29,4 +29,9 @@ public class MemberDAO {
 	public List<MemberVO> getList() {
 		return sqlSession.selectList("mSQL.nameList");
 	}
+	
+	// 회원 상세정보 db조회 전담처리함수
+	public MemberVO getDetail(int mno) {
+		return sqlSession.selectOne("mSQL.mDetail", mno);
+	}
 }

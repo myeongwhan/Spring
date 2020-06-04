@@ -6,9 +6,16 @@ import java.text.SimpleDateFormat;
 
 public class MemberVO {
 	private int mno, ano;
-	private String name, id, pw, mail, gen, tel, sdate, avatar;
+	private String name, id, pw, mail, gen, tel, sdate, avatar, status;
 	private Date jDate;
 	private Time jTime;
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getMno() {
 		return mno;
 	}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<van>
+	<people>
+		<person>
+			<mno>010-9292-4184</mno>
+			<name>전은석</name>
+			<id>whw</id>
+			<mail>ksh@increpas.com</mail>
+			<gen>M</gen>
+			<avatar>김성현</avatar>
+		</person>
+		<person>
+			<mno>010-2164-8888</mno>
+			<name>유태희</name>
+			<id>yth</id>
+			<mail>yth@increpas.com</mail>
+			<gen>M</gen>
+			<avatar>dDragon</avatar>
+		</person>
+	</people>
+</van>

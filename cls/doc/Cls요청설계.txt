@@ -14,3 +14,11 @@
 	처리함수	:	Member.getDetail()
 	뷰		:	/WEB-INF/views/member/memberDetail.jsp
 -------------------------------------------------------------
+# 댓글 페이지 보기 요청
+
+	요청내용	:	/cls/member/reBoard.cls
+	파라미터	:	
+	컨트롤러	:	com.increpas.cls.controller.member.Member
+	처리함수	:	ReBoard.ReBoard()
+	뷰		:	/WEB-INF/views/reboard/reBoard.jsp
+-------------------------------------------------------------

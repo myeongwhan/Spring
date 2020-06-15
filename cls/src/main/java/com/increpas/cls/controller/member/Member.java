@@ -1,6 +1,8 @@
 package com.increpas.cls.controller.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,13 +32,16 @@ public class Member {
 		 	로그아웃 처리가 정상적으로 실행되면 로그인페이지로 강제 이동하고,
 		 	실패하면 메인페이지로 다시 이동시키자
 		 */
-		String view = "/cls/member/login.cls";
+		
+		// 로그아웃 - 메인, 실패 - 로그인페이지로
+		String view = "/cls/main";
 		
 		RedirectView rv = null;
 		session.removeAttribute("SID");
 		String sid = (String) session.getAttribute("SID");
 		if(sid != null) { 
-			view = "/cls/main";
+			System.out.println("로그아웃 실패");
+			view = "/cls/member/login.cls";
 		}
 		
 		rv = new RedirectView(view);
@@ -58,6 +63,7 @@ public class Member {
 		return mv;
 	}
 	
+	// 회원가입 뷰
 	@RequestMapping("/join.cls")
 	public ModelAndView join(HttpSession session, ModelAndView mv) {
 		String sid = (String) session.getAttribute("SID");
@@ -69,6 +75,34 @@ public class Member {
 			mv.setViewName(view);
 		}
 		return mv;
+	}
+	
+	// 회원가입 처리
+	@RequestMapping("/joinProc.cls")
+	public ModelAndView joinProc(HttpSession session, MemberVO mVO, ModelAndView mv) {
+		// 전처리기로 mVO의 데이터가 유효하다는 전제하에 코딩해보자
+		
+		int cnt = mDAO.join(mVO);
+		RedirectView rv = null;
+		if(cnt == 1) {
+			rv = new RedirectView("/cls/member/login.cls");
+		} else {
+			rv = new RedirectView("/cls/member/join.cls");
+			System.out.println("회원가입 처리 에러");
+		}
+		
+		mv.setView(rv);
+		return mv;
+	}
+	
+	// 아이디 중복확인 비동기처리
+	@RequestMapping("/idCk.cls")
+	@ResponseBody	// (응답body 안에 반환값이 들어간다) 비동기처리할때 쓰는 어노테이션
+	public Map idCheck(String id) {
+		HashMap map = new HashMap();
+		map.put("cnt", mDAO.idCheck(id));	// {"cnt": 0}
+		
+		return map;
 	}
 	
 	@RequestMapping(path={"/Login.cls", "/Join.cls"})
@@ -91,7 +125,7 @@ public class Member {
 		return mv;
 	}
 	
-	
+	// (현재 실행중인)로그인처리
 	@RequestMapping(value="/loginProc.cls", method=RequestMethod.POST, params= {"id", "pw"})
 	public ModelAndView loginProc(String id, String pw, MemberVO mVO, ModelAndView mv, HttpSession session) {
 //	public ModelAndView loginProc(String id, String pw, ModelAndView mv, HttpSession session) {

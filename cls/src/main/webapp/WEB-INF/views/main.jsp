@@ -16,6 +16,9 @@
 		$('#lbtn').click(function(){
 			$(location).attr('href', '/cls/member/login.cls');
 		});
+		$('#jbtn').click(function(){
+			$(location).attr('href', '/cls/member/join.cls');
+		});
 		$('#obtn').click(function(){
 			$(location).attr('href', '/cls/member/logout.cls');
 		});
@@ -34,6 +37,7 @@
 		<div class="w3-col w3-margin-top">
 			<c:if test="${empty SID }">
 			<div class="w3-button w3-blue w3-hover-aqua" id="lbtn">Login</div>
+			<div class="w3-button w3-green w3-hover-aqua" id="jbtn">Join</div>
 			</c:if>
 			<c:if test="${not empty SID }">
 			<div class="w3-button w3-blue w3-hover-aqua" id="obtn">Logout</div>

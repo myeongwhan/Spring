@@ -59,6 +59,22 @@
 		<include refid="selCNT" /> #{id}
 	</select>
 	
+	<insert id="join" parameterType="mVO">
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(mno) + 1, 1000)
+			FROM
+				member
+			
+		</selectKey>
+		INSERT INTO
+			member(mno, name, id, pw, mail, gen, tel, ano)
+		VALUES(
+			#{mno}, #{name}, #{id}, #{pw}, #{mail}, #{gen}, #{tel}, #{ano}
+		)
+		
+	</insert>
+	
 	<!-- resultType은 한 줄 데이터를 담을 (mybatis의)데이터타입만 생각해서 적으면 됨 -->
 	<select id="nameList" resultType="mVO">
 		SELECT

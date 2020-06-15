@@ -16,6 +16,7 @@ public class MemberDAO {
 		System.out.println("### testDAO() 실행 ###");
 	}
 	
+	// 아이디 중복확인 전담처리함수
 	public int idCheck(String id) {
 		return sqlSession.selectOne("mSQL.idCount", id);
 	}
@@ -23,6 +24,11 @@ public class MemberDAO {
 	// 로그인 질의명령 전담처리함수
 	public int login(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.Login", mVO);
+	}
+	
+	// 회원가입 처리 전담처리함수
+	public int join(MemberVO mVO) {
+		return sqlSession.insert("mSQL.join", mVO);
 	}
 	
 	// 회원 버튼 리스트 가져오기 전담처리함수

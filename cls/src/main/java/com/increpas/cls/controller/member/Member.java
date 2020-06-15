@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -98,8 +96,8 @@ public class Member {
 	// 아이디 중복확인 비동기처리
 	@RequestMapping("/idCk.cls")
 	@ResponseBody	// (응답body 안에 반환값이 들어간다) 비동기처리할때 쓰는 어노테이션
-	public Map idCheck(String id) {
-		HashMap map = new HashMap();
+	public Map<String, Integer> idCheck(String id) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("cnt", mDAO.idCheck(id));	// {"cnt": 0}
 		
 		return map;

@@ -15,13 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.increpas.cls.dao.MemberDAO;
+import com.increpas.cls.service.ProfileService;
 import com.increpas.cls.vo.MemberVO;
+import com.increpas.cls.vo.ProfileVO;
 
 @Controller
 @RequestMapping("/member")
 public class Member {
 	@Autowired
 	MemberDAO mDAO;
+	@Autowired
+	ProfileService profileSrvc;
 	
 	@RequestMapping("/logout.cls")
 	public ModelAndView logout(HttpSession session, ModelAndView mv) {
@@ -77,12 +81,21 @@ public class Member {
 	
 	// 회원가입 처리
 	@RequestMapping("/joinProc.cls")
-	public ModelAndView joinProc(HttpSession session, MemberVO mVO, ModelAndView mv) {
+	public ModelAndView joinProc(ProfileVO fVO, MemberVO mVO, ModelAndView mv, HttpSession session) {
 		// 전처리기로 mVO의 데이터가 유효하다는 전제하에 코딩해보자
 		
 		int cnt = mDAO.join(mVO);
+		fVO.setMno(mVO.getMno());
 		RedirectView rv = null;
 		if(cnt == 1) {
+			// 프로파일 정보를 데이터베이스에 저장한다
+			int count = profileSrvc.addProfile(fVO, session);
+			if(count != 1) {
+				// 이 경우는 파일 정보 입력에 실패한 파일이 있는 경우이므로
+				// 이후 적절히 처리해주기로 하자
+				System.out.println("파일업로드 실패 ProfileService.addProfile()");
+			}
+			
 			rv = new RedirectView("/cls/member/login.cls");
 		} else {
 			rv = new RedirectView("/cls/member/join.cls");

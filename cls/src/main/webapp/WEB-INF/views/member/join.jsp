@@ -70,8 +70,7 @@
 <body>
 	<div class="w3-col l3 m3"><p></p></div>
 	<div class="w3-col l6 m6 s12">
-		<!-- <form class="w3-col" method="post" action="/cls/member/joinProc.cls" name="frm" id="frm" encType="multipart/form-data"> -->
-		<form class="w3-col" method="post" action="/cls/member/joinProc.cls" name="frm" id="frm">
+		<form class="w3-col" method="post" action="/cls/member/joinProc.cls" name="frm" id="frm" encType="multipart/form-data">
 			<div class="w3-col w3-padding w3-blue w3-card">
 				<h3 class="w3-center">Increpas Join</h3>
 			</div>

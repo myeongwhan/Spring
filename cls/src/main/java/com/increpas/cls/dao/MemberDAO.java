@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.increpas.cls.vo.MemberVO;
+import com.increpas.cls.vo.ProfileVO;
 
 public class MemberDAO {
 	@Autowired	// 자동의존주입
@@ -38,5 +39,15 @@ public class MemberDAO {
 	// 회원 상세정보 db조회 전담처리함수
 	public MemberVO getDetail(int mno) {
 		return sqlSession.selectOne("mSQL.mDetail", mno);
+	}
+	
+	// 아바타 추가 데이터베이스 작업 전담처리함수
+	public int addAvt(List list) {
+		return sqlSession.insert("mSQL.addAvt", list);
+	}
+	
+	//
+	public int insertProfile(ProfileVO fVO) {
+		return sqlSession.insert("mSQL.addProfile", fVO);
 	}
 }

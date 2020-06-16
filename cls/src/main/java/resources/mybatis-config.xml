@@ -37,6 +37,7 @@
 	  -->
 	  <typeAliases>
 	  	<typeAlias alias="mVO" type="com.increpas.cls.vo.MemberVO"/>
+	  	<typeAlias alias="fVO" type="com.increpas.cls.vo.ProfileVO"/>
 	  </typeAliases>
 	  
 	  <!-- 

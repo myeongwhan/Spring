@@ -75,6 +75,31 @@
 		
 	</insert>
 	
+	<!-- 
+	<insert id="addAvt" parameterType="aVO">
+		INSERT INTO
+		
+		VALUES(
+		
+		)
+	</insert>
+	 -->
+	
+	<!-- Profile 데이터 입력 -->
+	<insert id="addProfile" parameterType="fVO">
+		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(pno)+1, 1001)
+			FROM
+				profile
+		</selectKey>
+		INSERT INTO
+			profile(pno, p_mno, oriname, savename, len)
+		VALUES(
+			#{pno}, #{mno}, #{oriname}, #{savename}, #{len}
+		)
+	</insert>
+	
 	<!-- resultType은 한 줄 데이터를 담을 (mybatis의)데이터타입만 생각해서 적으면 됨 -->
 	<select id="nameList" resultType="mVO">
 		SELECT

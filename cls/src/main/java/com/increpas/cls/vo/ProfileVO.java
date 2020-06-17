@@ -18,7 +18,6 @@ public class ProfileVO {
 	private long len;
 	private String pcode, oriname, savename, dir, sdate, isshow;
 	private Date pdate;
-	private Time ptime;
 	
 	/*
 		업로드된 파일을 기억할 변수는 (fileupload.jar에서)
@@ -88,9 +87,8 @@ public class ProfileVO {
 		return sdate;
 	}
 	public void setSdate() {
-		SimpleDateFormat form1 = new SimpleDateFormat("yyyy년 MM월 dd일");
-		SimpleDateFormat form2 = new SimpleDateFormat(" HH:mm:ss");
-		this.sdate = form1.format(pdate) + form2.format(ptime);
+		SimpleDateFormat form1 = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+		this.sdate = form1.format(pdate);
 	}
 	public void setSdate(String sdate) {
 		this.sdate = sdate;
@@ -107,19 +105,11 @@ public class ProfileVO {
 	public void setPdate(Date pdate) {
 		this.pdate = pdate;
 	}
-	public Time getPtime() {
-		return ptime;
-	}
-	public void setPtime(Time ptime) {
-		this.ptime = ptime;
-		setSdate();
-	}
 	
 	@Override
 	public String toString() {
 		return "ProfileVO [pno=" + pno + ", mno=" + mno + ", len=" + len + ", pcode=" + pcode + ", oriname=" + oriname
-				+ ", savename=" + savename + ", dir=" + dir + ", isshow=" + isshow + ", pdate=" + pdate + ", ptime="
-				+ ptime + "]";
+				+ ", savename=" + savename + ", dir=" + dir + ", isshow=" + isshow + ", pdate=" + pdate + "]";
 	}
 	
 }

@@ -164,6 +164,44 @@ public class Member {
 		return mv;
 	}
 	
+	// 정보수정페이지 뷰
+	@RequestMapping("/editMemb.cls")
+	public ModelAndView editMemb(HttpSession session, ModelAndView mv) {
+		String sid = (String) session.getAttribute("SID");
+		String view = "member/editMemb";
+		
+		if(sid != null) {
+			mv.setViewName(view);
+		} else {
+			RedirectView rv= new RedirectView("/cls/main");
+			mv.setView(rv);
+		}
+		
+		int mno = mDAO.outMno(sid);
+		MemberVO mVO = mDAO.getDetail(mno);
+		mVO.setBirth();
+		ProfileVO fVO = mDAO.selProfile(mno);
+		mv.addObject("DATA", mVO);
+		mv.addObject("PIC", fVO);
+		return mv;
+	}
+	
+	// 정보수정 처리
+	@RequestMapping("/editProc.cls")
+	public ModelAndView editProc(HttpSession session, ModelAndView mv, MemberVO mVO) {
+		String sid = (String) session.getAttribute("SID");
+		
+		int cnt = mDAO.editMember(mVO);
+		if(cnt == 1) {
+			RedirectView rv = new RedirectView("/cls/main");
+			mv.setView(rv);
+		} else {
+			System.out.println("정보수정에러");
+		}
+		
+		return mv;
+	}
+	
 	// 회원 버튼 리스트페이지 보기 요청처리함수
 	@RequestMapping("/memberList.cls")
 	public ModelAndView getList(ModelAndView mv) {

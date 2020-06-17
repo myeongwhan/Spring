@@ -46,8 +46,24 @@ public class MemberDAO {
 		return sqlSession.insert("mSQL.addAvt", list);
 	}
 	
-	//
+	// 프사넣기
 	public int insertProfile(ProfileVO fVO) {
 		return sqlSession.insert("mSQL.addProfile", fVO);
 	}
+	
+	// 프사 savename 뽑기
+	public ProfileVO selProfile(int mno) {
+		return sqlSession.selectOne("mSQL.selProfile", mno);
+	}
+	
+	// mno 조회
+	public int outMno(String id) {
+		return sqlSession.selectOne("mSQL.mno", id);
+	}
+	
+	// 정보수정(MemberVO)
+	public int editMember(MemberVO mVO) {
+		return sqlSession.update("mSQL.editMember", mVO);
+	}
+	
 }

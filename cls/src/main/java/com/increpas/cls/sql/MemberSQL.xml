@@ -100,6 +100,16 @@
 		)
 	</insert>
 	
+	<!-- 프사 savename 뽑기 -->
+	<select id="selProfile" resultType="fVO" parameterType="int">
+		SELECT
+			savename
+		FROM
+			profile
+		WHERE
+			p_mno = #{mno}
+	</select>
+	
 	<!-- resultType은 한 줄 데이터를 담을 (mybatis의)데이터타입만 생각해서 적으면 됨 -->
 	<select id="nameList" resultType="mVO">
 		SELECT
@@ -110,9 +120,10 @@
 			isshow = 'Y'
 	</select>
 	
+	<!-- mno로 회원상세정보 뽑기 -->
 	<select id="mDetail" resultType="mVO" parameterType="int">
 		SELECT
-			mno, name, id, mail, tel,
+			mno, name, id, mail, tel, bDate, m.ano,
 			DECODE(m.gen, 'M', '남자', 'F', '여자') gen,
 			joindate jDate, joindate jTime, savename avatar
 		FROM
@@ -121,4 +132,38 @@
 			mno = #{mno}
 			AND m.ano = a.ano
 	</select>
+	
+	<!-- mno뽑기 -->
+	<select id="mno" resultType="int" parameterType="String">
+		SELECT
+			mno
+		FROM
+			member
+		WHERE
+			id = #{id}
+	</select>
+	
+	<!-- 정보수정(비번 또는 아바타. MemberVO) -->
+	<update id="editMember" parameterType="mVO">
+		UPDATE
+			member
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pw">
+				pw = #{pw},
+			</if>
+			<if test="ano">
+				ano = #{ano},
+			</if>
+		</trim>
+		WHERE
+			id = #{id}
+	</update>
+	
+	<!-- 정보수정(프사. ProfileVO) -->
+	<insert id="editProfile" parameterType="fVO">
+		UPDATE
+			profile
+		SET
+			
+	</insert>
 </mapper>

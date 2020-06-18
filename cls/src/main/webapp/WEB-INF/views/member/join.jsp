@@ -171,17 +171,7 @@
 				<!-- 년월일 -->
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding" for="birth">생년월일 :</label>
-					<div class="w3-col m9 w3-padding">
-						<select class="w3-col m4" id="year">
-							<option>년</option>
-						</select>
-						<select class="w3-col m4" id="month">
-							<option>월</option>
-						</select>
-						<select class="w3-col m4" id="day">
-							<option>일</option>
-						</select>
-					</div>
+					<input type="date" name="bDate">
 				</div>
 			</div>
 		</form>

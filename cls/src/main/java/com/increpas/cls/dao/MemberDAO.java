@@ -1,5 +1,6 @@
 package com.increpas.cls.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -54,6 +55,12 @@ public class MemberDAO {
 	// 프사 savename 뽑기
 	public ProfileVO selProfile(int mno) {
 		return sqlSession.selectOne("mSQL.selProfile", mno);
+//		return sqlSession.selectList("mSQL.selProfile", mno);
+	}
+	
+	// test
+	public List<ProfileVO> sel2Profile(int mno){
+		return sqlSession.selectList("mSQL.selProfile", mno);
 	}
 	
 	// mno 조회
@@ -61,7 +68,7 @@ public class MemberDAO {
 		return sqlSession.selectOne("mSQL.mno", id);
 	}
 	
-	// 정보수정(MemberVO)
+	// 회원정보 데이터베이스 수정 전담처리함수
 	public int editMember(MemberVO mVO) {
 		return sqlSession.update("mSQL.editMember", mVO);
 	}

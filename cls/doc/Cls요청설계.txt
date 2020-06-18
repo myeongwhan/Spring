@@ -22,3 +22,19 @@
 	처리함수	:	ReBoard.ReBoard()
 	뷰		:	/WEB-INF/views/reboard/reBoard.jsp
 -------------------------------------------------------------
+# 회원 정보수정페이지 보기 요청
+
+	요청내용	:	/cls/member/memberEdit.cls
+	파라미터	:	(SID)
+	컨트롤러	:	com.increpas.cls.controller.member.Member
+	처리함수	:	Member.memberEdit()
+	뷰		:	/WEB-INF/views/member/memberEdit.jsp
+-------------------------------------------------------------
+# 회원 정보수정 처리 요청
+
+	요청내용	:	/cls/member/memberEditProc.cls
+	파라미터	:	mVO
+	컨트롤러	:	com.increpas.cls.controller.member.Member
+	처리함수	:	Member.editProc()
+	뷰		:	redirect- /cls/member/memberDetail.cls
+-------------------------------------------------------------

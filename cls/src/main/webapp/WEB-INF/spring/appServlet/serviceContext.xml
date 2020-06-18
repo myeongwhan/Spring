@@ -10,5 +10,6 @@
 
 	<!-- 회원관련 데이터베이스 처리 service 빈처리 -->
 	<bean id="fSrvc" class="com.increpas.cls.service.ProfileService" />
+	<bean id="mSrvc" class="com.increpas.cls.service.MemberService" />
 	
 </beans>

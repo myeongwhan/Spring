@@ -1,7 +1,9 @@
 package com.increpas.cls.controller.member;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.increpas.cls.dao.MemberDAO;
+import com.increpas.cls.service.MemberService;
 import com.increpas.cls.service.ProfileService;
 import com.increpas.cls.vo.MemberVO;
 import com.increpas.cls.vo.ProfileVO;
@@ -26,6 +29,8 @@ public class Member {
 	MemberDAO mDAO;
 	@Autowired
 	ProfileService profileSrvc;
+	@Autowired
+	MemberService mSrvc;
 	
 	@RequestMapping("/logout.cls")
 	public ModelAndView logout(HttpSession session, ModelAndView mv) {
@@ -165,10 +170,10 @@ public class Member {
 	}
 	
 	// 정보수정페이지 뷰
-	@RequestMapping("/editMemb.cls")
-	public ModelAndView editMemb(HttpSession session, ModelAndView mv) {
+	@RequestMapping("/memberEdit.cls")
+	public ModelAndView memberEdit(HttpSession session, ModelAndView mv) {
 		String sid = (String) session.getAttribute("SID");
-		String view = "member/editMemb";
+		String view = "member/memberEdit";
 		
 		if(sid != null) {
 			mv.setViewName(view);
@@ -181,25 +186,40 @@ public class Member {
 		MemberVO mVO = mDAO.getDetail(mno);
 		mVO.setBirth();
 		ProfileVO fVO = mDAO.selProfile(mno);
+//		List<ProfileVO> list = mDAO.sel2Profile(mno);
+		
 		mv.addObject("DATA", mVO);
 		mv.addObject("PIC", fVO);
+//		mv.addObject("PIC", list);
 		return mv;
 	}
 	
 	// 정보수정 처리
-	@RequestMapping("/editProc.cls")
-	public ModelAndView editProc(HttpSession session, ModelAndView mv, MemberVO mVO) {
-		String sid = (String) session.getAttribute("SID");
-		
-		int cnt = mDAO.editMember(mVO);
-		if(cnt == 1) {
-			RedirectView rv = new RedirectView("/cls/main");
-			mv.setView(rv);
-		} else {
-			System.out.println("정보수정에러");
+	@RequestMapping("/memberEditProc.cls")
+	public ModelAndView editProc(HttpSession session, ModelAndView mv, MemberVO mVO, ProfileVO fVO) {
+		// 할일
+		// 데이터 체크하고
+//		int cnt = 0;
+		if(mVO.getPw() != null || mVO.getAno() != 0) {
+			System.out.println("asdf");
+			mSrvc.editMember(mVO);
 		}
 		
+		// 맨 마지막 파일(인덱스) 널 빼기
+		fVO.setFile(Arrays.copyOf(fVO.getFile(), fVO.getFile().length - 1));
+		
+		profileSrvc.addProfile(fVO, session);
+		RedirectView rv = new RedirectView("/cls/member/memberDetail.cls?mno=" + mVO.getMno());
+		mv.setView(rv);
 		return mv;
+		
+//		int cnt = mDAO.editMember(mVO);
+//		if(cnt == 1) {
+//			RedirectView rv = new RedirectView("/cls/main");
+//			mv.setView(rv);
+//		} else {
+//			System.out.println("정보수정에러");
+//		}
 	}
 	
 	// 회원 버튼 리스트페이지 보기 요청처리함수

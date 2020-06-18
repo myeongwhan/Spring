@@ -49,7 +49,7 @@
 			</div>
 			<div class="w3-border-bottom w3-margin-bottom">
 				<div class="w3-col w-200 f16">가입일자: </div>
-				<div class="w3-rest f16">${DATA.jDate } ${DATA.jTime }</div>
+				<div class="w3-rest f16">${DATA.sdate }</div>
 			</div>
 		</div>
 	</div>

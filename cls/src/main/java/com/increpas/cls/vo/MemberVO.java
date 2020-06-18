@@ -85,6 +85,7 @@ public class MemberVO {
 	}
 	public void setjDate(Date jDate) {
 		this.jDate = jDate;
+		setSdate();
 	}
 	public Date getbDate() {
 		return bDate;

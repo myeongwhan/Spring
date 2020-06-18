@@ -68,9 +68,9 @@
 			
 		</selectKey>
 		INSERT INTO
-			member(mno, name, id, pw, mail, gen, tel, ano)
+			member(mno, name, id, pw, mail, gen, tel, ano, bDate)
 		VALUES(
-			#{mno}, #{name}, #{id}, #{pw}, #{mail}, #{gen}, #{tel}, #{ano}
+			#{mno}, #{name}, #{id}, #{pw}, #{mail}, #{gen}, #{tel}, #{ano}, #{bDate}
 		)
 		
 	</insert>
@@ -148,15 +148,15 @@
 		UPDATE
 			member
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="pw">
+			<if test="pw neq ''">
 				pw = #{pw},
 			</if>
-			<if test="ano">
+			<if test="ano neq 0">
 				ano = #{ano},
 			</if>
 		</trim>
 		WHERE
-			id = #{id}
+			mno = #{mno}
 	</update>
 	
 	<!-- 정보수정(프사. ProfileVO) -->

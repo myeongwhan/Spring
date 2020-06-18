@@ -23,7 +23,7 @@
 			$(location).attr('href', '/cls/member/logout.cls');
 		});
 		$('#ebtn').click(function(){
-			$(location).attr('href', '/cls/member/editMemb.cls');
+			$(location).attr('href', '/cls/member/memberEdit.cls');
 		});
 		$('#mlbtn').click(function(){
 			$(location).attr('href', '/cls/member/memberList.cls');

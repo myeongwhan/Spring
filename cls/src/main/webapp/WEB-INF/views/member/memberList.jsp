@@ -57,6 +57,10 @@
 				}
 			});
 		});
+		
+		$('#hbtn').click(function(){
+			$(location).attr('href', '/cls/main');
+		});
 	});
 </script>
 </head>
@@ -109,5 +113,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="w3-content mxw">
+		<div class="w3-card-4 w3-button w3-margin-bottom w-150 w3-blue" id="hbtn">홈으로</div>
+	</div>
+	
 </body>
 </html>

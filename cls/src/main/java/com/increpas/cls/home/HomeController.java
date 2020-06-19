@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -22,16 +23,14 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, String id) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		System.out.println("parameter id : " + id);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
+		logger.info("Welcome home! The client locale is {}.{} - {}", locale, " - euns", formattedDate);
 		
 		model.addAttribute("serverTime", formattedDate );
 		

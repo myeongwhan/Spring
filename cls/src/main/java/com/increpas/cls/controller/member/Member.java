@@ -1,13 +1,18 @@
 package com.increpas.cls.controller.member;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.increpas.cls.dao.MemberDAO;
+import com.increpas.cls.home.HomeController;
 import com.increpas.cls.service.MemberService;
 import com.increpas.cls.service.ProfileService;
+import com.increpas.cls.vo.BoardVO;
 import com.increpas.cls.vo.MemberVO;
 import com.increpas.cls.vo.ProfileVO;
 
@@ -31,6 +38,8 @@ public class Member {
 	ProfileService profileSrvc;
 	@Autowired
 	MemberService mSrvc;
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping("/logout.cls")
 	public ModelAndView logout(HttpSession session, ModelAndView mv) {
@@ -143,7 +152,7 @@ public class Member {
 	
 	// (현재 실행중인)로그인처리
 	@RequestMapping(value="/loginProc.cls", method=RequestMethod.POST, params= {"id", "pw"})
-	public ModelAndView loginProc(String id, String pw, MemberVO mVO, ModelAndView mv, HttpSession session) {
+	public ModelAndView loginProc(String id, String pw, MemberVO mVO, ModelAndView mv, HttpSession session, Locale locale) {
 //	public ModelAndView loginProc(String id, String pw, ModelAndView mv, HttpSession session) {
 //		System.out.println("## id: " + id);
 //		System.out.println("## pw: " + pw);
@@ -154,12 +163,19 @@ public class Member {
 		mVO.setId(id);
 		mVO.setPw(pw);
 		*/
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		
 		int cnt = mDAO.login(mVO);
 		mDAO.testDAO();
 		
 		RedirectView rv = null;
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
+			logger.info("Login ID : {} - {}", mVO.getId(), formattedDate);
 			rv = new RedirectView("/cls/main");
 		} else {
 			// 아이디와 비밀번호에 맞는 회원이 없는 경우이므로 다시 로그인페이지로 이동시킨다
@@ -299,4 +315,5 @@ public class Member {
 		
 		return list;
 	}
+	
 }

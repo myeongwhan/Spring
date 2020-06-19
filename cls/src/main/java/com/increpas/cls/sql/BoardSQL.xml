@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="bSQL">
+	<select id="getList" resultType="bVO" parameterType="page">
+		SELECT
+			rno, bno, mno, id, name, title, body, bdate, bdate btime, click
+		FROM
+			(
+			SELECT
+				ROWNUM rno, bno, mno, id, name, title, body, bdate, click
+			FROM
+				(SELECT
+					bno, bmno mno, id, name, title, body, board.bdate bdate, click
+				FROM
+					board, member
+				WHERE
+					bmno = mno
+					AND board.isshow = 'Y'
+				ORDER BY
+					bdate desc) brd
+			)
+		WHERE
+			rno BETWEEN #{startCont} AND #{endCont}
+	</select>
+	
+	<select id="selCnt" resultType="int">
+		SELECT
+			COUNT(*) totalCount
+		FROM
+			board
+		WHERE
+			isshow = 'Y'
+	</select>
+</mapper>

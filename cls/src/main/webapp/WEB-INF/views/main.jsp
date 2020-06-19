@@ -28,8 +28,11 @@
 		$('#mlbtn').click(function(){
 			$(location).attr('href', '/cls/member/memberList.cls');
 		});
-		$('#rbtn').click(function(){
+		/* $('#rbtn').click(function(){
 			$(location).attr('href', '/cls/member/reBoard.cls');
+		}); */
+		$('#bbtn').click(function(){
+			$(location).attr('href', '/cls/board/boardList.cls');
 		});
 	});
 </script>
@@ -46,7 +49,8 @@
 			<div class="w3-button w3-blue w3-hover-aqua" id="obtn">Logout</div>
 			<div class="w3-button w3-green w3-hover-aqua" id="ebtn">edit</div>
 			<div class="w3-button w3-indigo w3-hover-blue" id="mlbtn">MemberList</div>
-			<div class="w3-button w3-purple w3-hover-red" id="rbtn">reBoard</div>
+			<!-- <div class="w3-button w3-purple w3-hover-red" id="rbtn">reBoard</div> -->
+			<div class="w3-button w3-black w3-hover-blue" id="bbtn">BoardList</div>
 			</c:if>
 		</div>
 	</div>

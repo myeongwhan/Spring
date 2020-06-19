@@ -6,16 +6,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>게시판보기</title>
-<link rel="stylesheet" href="/clsProj/css/w3.css">
+<link rel="stylesheet" href="/cls/css/w3.css">
 <style>
     .mxw{max-width: 1200px;}
     .bnone{display: none;}
 </style>
-<script type="text/javascript" src="/clsProj/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#write').click(function(){
-			$(location).attr('href', '/clsProj/board/boardWrite.cls');
+			$(location).attr('href', '/cls/board/boardWrite.cls');
 		});
 		
 		$('.pbtn').click(function(){
@@ -28,7 +28,7 @@
 			} else {
 				$('#nowPage').val(bstr);
 			}
-			$('#frm').attr('action', '/clsProj/board/board.cls');
+			$('#frm').attr('action', '/cls/board/boardList.cls');
 			$('#frm').submit();
 		});
 		
@@ -36,7 +36,7 @@
 			var sno = $(this).attr('id');
 			$('#bno').val(sno);
 			$('#nowPage').val('${PAGE.nowPage}')	// 상세보기에서 목록으로 돌아갈 때 쓰임
-			$('#frm').attr('action', '/clsProj/board/boardDetailProc.cls');
+			$('#frm').attr('action', '/cls/board/boardDetailProc.cls');
 			$('#frm').submit();
 		});
 		

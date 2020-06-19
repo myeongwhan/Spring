@@ -38,6 +38,8 @@
 	  <typeAliases>
 	  	<typeAlias alias="mVO" type="com.increpas.cls.vo.MemberVO"/>
 	  	<typeAlias alias="fVO" type="com.increpas.cls.vo.ProfileVO"/>
+	  	<typeAlias alias="bVO" type="com.increpas.cls.vo.BoardVO"/>
+	  	<typeAlias alias="page" type="com.increpas.cls.util.PageUtil"/>
 	  </typeAliases>
 	  
 	  <!-- 
@@ -58,5 +60,6 @@
 	  
 	  <mappers>
 	  	<mapper resource="com/increpas/cls/sql/MemberSQL.xml" />
+	  	<mapper resource="com/increpas/cls/sql/BoardSQL.xml" />
 	  </mappers>
 </configuration>

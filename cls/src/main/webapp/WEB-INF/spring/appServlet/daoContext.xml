@@ -12,8 +12,8 @@
 	<bean id="mDAO" class="com.increpas.cls.dao.MemberDAO" />
 	
 	<!-- 게시판 관련 데이터베이스 작업 dao 빈처리 -->
-	<!-- 
 	<bean id="bDAO" class="com.increpas.cls.dao.BoardDAO" />
+	<!-- 
 	 -->
 	 
 	<!-- 댓글게시판 관련 데이터베이스 작업 dao 빈처리 -->

@@ -1,6 +1,9 @@
 package com.increpas.cls.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.increpas.cls.dao.MemberDAO;
 import com.increpas.cls.vo.MemberVO;
@@ -22,5 +25,9 @@ public class MemberService {
 		// 받은 데이터로 데이터베이스 작업을 해주고 결과받아서 반환해준다
 		cnt = mDAO.editMember(mVO);
 		return cnt;
+	}
+	
+	public void loginCk(HttpServletRequest req, ModelAndView mv) {
+		System.out.println("### MemberService ###");
 	}
 }

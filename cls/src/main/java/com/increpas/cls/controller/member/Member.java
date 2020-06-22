@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -66,30 +67,31 @@ public class Member {
 	}
 
 	@RequestMapping("/login.cls")
-	public ModelAndView login(HttpSession session, ModelAndView mv) {
-		String sid = (String) session.getAttribute("SID");
-		String view = "member/login";
-		if(sid != null) {
-			System.out.println("Session SID: " + session.getAttribute("SID"));
-			RedirectView rv= new RedirectView("/cls/main");
-			mv.setView(rv);
-		} else {
-			mv.setViewName(view);
-		}
+	public ModelAndView loginForm(HttpServletRequest req, ModelAndView mv) {
+//		String sid = (String) session.getAttribute("SID");
+//		String view = "member/login";
+//		if(sid != null) {
+//			System.out.println("Session SID: " + session.getAttribute("SID"));
+//			RedirectView rv= new RedirectView("/cls/main");
+//			mv.setView(rv);
+//		} else {
+//			mv.setViewName(view);
+//		}
+		System.out.println("####controller");
 		return mv;
 	}
 	
 	// 회원가입 뷰
 	@RequestMapping("/join.cls")
-	public ModelAndView join(HttpSession session, ModelAndView mv) {
-		String sid = (String) session.getAttribute("SID");
-		String view = "member/join";
-		if(sid != null) {
-			RedirectView rv= new RedirectView("main");
-			mv.setView(rv);
-		} else {
-			mv.setViewName(view);
-		}
+	public ModelAndView joinForm(HttpServletRequest req, ModelAndView mv) {
+//		String sid = (String) session.getAttribute("SID");
+//		String view = "member/join";
+//		if(sid != null) {
+//			RedirectView rv= new RedirectView("main");
+//			mv.setView(rv);
+//		} else {
+//			mv.setViewName(view);
+//		}
 		return mv;
 	}
 	
@@ -131,7 +133,7 @@ public class Member {
 	}
 	
 	@RequestMapping(path={"/Login.cls", "/Join.cls"})
-	public ModelAndView doolcuri(ModelAndView mv) {
+	public ModelAndView doolcuri(HttpServletRequest req, ModelAndView mv) {
 		String view = "main";
 		mv.setViewName(view);
 		return mv;

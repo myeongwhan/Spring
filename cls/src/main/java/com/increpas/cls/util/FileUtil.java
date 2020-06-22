@@ -2,6 +2,8 @@ package com.increpas.cls.util;
 
 import java.io.File;
 
+import org.springframework.web.multipart.MultipartFile;
+
 /**
  * 이 클래스는 파일 업로드에 필요한 기능을 처리하기 위해서 만든 유틸리티 클래스
  * @author	이명환

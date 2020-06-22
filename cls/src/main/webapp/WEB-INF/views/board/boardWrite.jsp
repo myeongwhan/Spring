@@ -6,42 +6,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판글쓰기</title>
-    <link rel="stylesheet" href="/clsProj/css/w3.css">
+    <link rel="stylesheet" href="/cls/css/w3.css">
 <style>
     
 </style>
-<script type="text/javascript" src="/clsProj/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
-	var cnt = 1;
 	
+	/*
 	function setNum(cnt){
 		cnt = cnt + 1;
 		return cnt;
 	}
+	*/
 	
+	var cnt = 1;
 	function addTg(){
-		cnt = setNum(cnt);
-		var tag1 = '<input class="file w3-input w3-border" type="file" name="file'+ cnt +'">';
+		/*cnt = setNum(cnt);*/
+		var tag1 = '<input class="file w3-input w3-border" type="file" name="file">';
 		$('.box').append(tag1);
+		var el = $('.box > input:file');
+		alert('## length' + el.length);
+		
 		$('.box > input').last().change(function(){
-			addTg();
+			var str = $(this).val();
+			if(str){
+				addTg();
+			} else {
+				$(this).remove();
+			}
 		});
 	}
 	$(function(){
 		$('#save').click(function(){
 			// 데이터 유효성 검사하고
+			//$('input[type="file"][value=""]').prop('disabled', 'disabled');
 			
 			$('#frm').submit();
 		});
 		
-		$('.file').change(function(){
-			alert(cnt);
-			addTg();
+		/* $('.file').change(function(){
+			var str = this[0].files;
+			alert(str);
+			if(str){
+				addTg();
+			}
+		}); */
+		addTg();
+		/*
+		$('.file').click(function(){
+			var str = $(this).val();
+			alert(str);
+			if(!str || str == ''){
+				addTg();
+			}
 			//alert(cnt);
 		})
+		*/
 		
 		$('#cancel').click(function(){
-			$(location).attr('href', '/clsProj/board/board.cls');
+			$(location).attr('href', '/cls/board/boardList.cls');
 		});
 	});
 </script>
@@ -51,14 +75,14 @@
         <div class="w3-center w3-col ">
             <h2>게시판글쓰기</h2>
         </div>
-        <form method="post" action="/clsProj/board/boardWriteProc.cls" id="frm" encType="multipart/form-data" class="w3-row w3-margin-top">
+        <form method="post" action="/cls/board/boardWriteProc.cls" id="frm" encType="multipart/form-data" class="w3-row w3-margin-top">
             <div class="w3-row w3-margin-top">
                 <div class="w3-card w3-padding">
                     <input class="w3-border-0" type="text" name="title" id="title" placeholder="제목 입력란" style="width: 960px;">
                 </div>
             </div>
             <div class="w3-row w3-margin-top w3-left-align box">
-                <input class="file w3-border w3-input" type="file" name="file1">
+                <!-- <input class="file w3-border w3-input" type="file" name="file"> -->
                 <!-- 
                 <input class="file w3-border w3-input" type="file" name="file2">
                 <input class="file w3-border w3-input" type="file" name="file3">

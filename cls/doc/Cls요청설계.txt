@@ -38,3 +38,24 @@
 	처리함수	:	Member.editProc()
 	뷰		:	redirect- /cls/member/memberDetail.cls
 -------------------------------------------------------------
+
+============================================================
+
+# 게시판리스트 보기 요청
+
+	요청내용	:	/cls/board/boardList.cls
+	파라미터	:	nowPage( ==> PageUtil.nowPage )
+	컨트롤러	:	com.increpas.cls.controller.board.Board
+	처리함수	:	Board.boardList()
+	뷰		:	board/boardList.jsp
+				redirect- /cls/member/login.cls
+-------------------------------------------------------------
+# 게시판 글쓰기 폼 보기 요청
+
+	요청내용	:	/cls/board/boardWrite.cls
+	파라미터	:	nowPage( ==> PageUtil.nowPage )
+	컨트롤러	:	com.increpas.cls.controller.board.Board
+	처리함수	:	Board.boardWrite()
+	뷰		:	board/boardWrite.jsp
+				redirect- /cls/member/login.cls
+-------------------------------------------------------------

@@ -34,4 +34,14 @@
 		WHERE
 			isshow = 'Y'
 	</select>
+	
+	<insert id="write" parameterType="bVO">
+		INSERT INTO
+			board(bno, bmno, title, body)
+		VALUES(
+			(SELECT NVL(MAX(bno) + 1, 1000) FROM board),
+			(SELECT mno FROM member WHERE id = #{id}),
+			#{title}, #{body}
+		)
+	</insert>
 </mapper>

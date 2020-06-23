@@ -98,7 +98,9 @@ public class MemberAOP {
       }
    }
    
-   @Before("execution(* com.increpas.cls.service.BoardService.writeSrvc(..))")
+   @Before("execution(* com.increpas.cls.service.BoardService.writeSrvc(..)) || " +
+		   "execution(* com.increpas.cls.service.BoardService.getDetail(..))"
+		   )
    public void loginCk1(JoinPoint join) {
 	   Object[] obj = join.getArgs();
 	   HttpServletRequest req = (HttpServletRequest) obj[0];
@@ -114,19 +116,4 @@ public class MemberAOP {
 	   }
    }
    
-   @Before("execution(* com.increpas.cls.service.BoardService.writeProcSrvc(..))")
-   public void loginCk2(JoinPoint join) {
-	   Object[] obj = join.getArgs();
-	   HttpServletRequest req = (HttpServletRequest) obj[0];
-	   
-	   String view = "board/boardList";
-	   
-	   HttpSession session = req.getSession();
-	   String sid = (String)session.getAttribute("SID");
-	   if(sid == null) {
-		   ((ModelAndView) obj[1]).addObject("isLogin", false);
-	   } else {
-		   ((ModelAndView) obj[1]).addObject("isLogin", true);
-	   }
-   }
 }

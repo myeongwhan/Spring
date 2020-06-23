@@ -36,7 +36,7 @@
 			var sno = $(this).attr('id');
 			$('#bno').val(sno);
 			$('#nowPage').val('${PAGE.nowPage}')	// 상세보기에서 목록으로 돌아갈 때 쓰임
-			$('#frm').attr('action', '/cls/board/boardDetailProc.cls');
+			$('#frm').attr('action', '/cls/board/boardDetail.cls');
 			$('#frm').submit();
 		});
 		

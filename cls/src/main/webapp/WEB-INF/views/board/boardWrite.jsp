@@ -26,7 +26,7 @@
 		var tag1 = '<input class="file w3-input w3-border" type="file" name="file">';
 		$('.box').append(tag1);
 		var el = $('.box > input:file');
-		alert('## length' + el.length);
+		//alert('## length' + el.length);
 		
 		$('.box > input').last().change(function(){
 			var str = $(this).val();
@@ -41,28 +41,11 @@
 		$('#save').click(function(){
 			// 데이터 유효성 검사하고
 			//$('input[type="file"][value=""]').prop('disabled', 'disabled');
-			
+			$('input:file').last().remove();
 			$('#frm').submit();
 		});
 		
-		/* $('.file').change(function(){
-			var str = this[0].files;
-			alert(str);
-			if(str){
-				addTg();
-			}
-		}); */
 		addTg();
-		/*
-		$('.file').click(function(){
-			var str = $(this).val();
-			alert(str);
-			if(!str || str == ''){
-				addTg();
-			}
-			//alert(cnt);
-		})
-		*/
 		
 		$('#cancel').click(function(){
 			$(location).attr('href', '/cls/board/boardList.cls');
@@ -83,11 +66,6 @@
             </div>
             <div class="w3-row w3-margin-top w3-left-align box">
                 <!-- <input class="file w3-border w3-input" type="file" name="file"> -->
-                <!-- 
-                <input class="file w3-border w3-input" type="file" name="file2">
-                <input class="file w3-border w3-input" type="file" name="file3">
-                <input class="file w3-border w3-input" type="file" name="file4">
-                 -->
             </div>
             <div class="w3-row w3-margin-top">
                 <div class="w3-card w3-padding mih w3-margin-bottom" style="min-height: 700px;">

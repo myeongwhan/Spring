@@ -5,11 +5,18 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 
 public class BoardVO {
-	private int rno, ano, bno, mno, click;
-	private String id, title, body, sdate, name;
+	private int rno, ano, bno, bino, mno, click;
+	private String id, title, body, oriname, savename, sdate, name;
 	private Date bdate;
 	private Time btime;
+	private ProfileVO fVO;
 	
+	public ProfileVO getfVO() {
+		return fVO;
+	}
+	public void setfVO(ProfileVO fVO) {
+		this.fVO = fVO;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -85,6 +92,24 @@ public class BoardVO {
 	public void setBtime(Time btime) {
 		this.btime = btime;
 		setSdate();
+	}
+	public int getBino() {
+		return bino;
+	}
+	public void setBino(int bino) {
+		this.bino = bino;
+	}
+	public String getOriname() {
+		return oriname;
+	}
+	public void setOriname(String oriname) {
+		this.oriname = oriname;
+	}
+	public String getSavename() {
+		return savename;
+	}
+	public void setSavename(String savename) {
+		this.savename = savename;
 	}
 	
 	@Override

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -15,6 +16,7 @@ import com.increpas.cls.dao.BoardDAO;
 import com.increpas.cls.service.BoardService;
 import com.increpas.cls.util.PageUtil;
 import com.increpas.cls.vo.BoardVO;
+import com.increpas.cls.vo.ProfileVO;
 
 @Controller
 @RequestMapping("/board")
@@ -63,17 +65,28 @@ public class Board {
 	
 	// 게시판 글쓰기 처리
 	@RequestMapping("/boardWriteProc.cls")
-	public ModelAndView writeProc(HttpServletRequest req, ModelAndView mv, PageUtil page, BoardVO bVO) {
-		String sid = (String) req.getSession().getAttribute("SID");
-		System.out.println(sid);
-		bVO.setId(sid);
-		int cnt = bDAO.writeProc(bVO);
-		System.out.println(cnt);
-		if(cnt == 1) {
-			bSrvc.writeProcSrvc(req, mv, page);
-		} else {
-			mv.setView(new RedirectView("/cls/member/login.cls"));
+	public ModelAndView writeProc(HttpServletRequest req, ModelAndView mv, BoardVO bVO, ProfileVO fVO) {
+		bVO.setfVO(fVO);
+		try {
+			bSrvc.writeSrvc(req, mv, bVO);
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
+		return mv;
+	}
+	
+	// 게시판 상세보기 폼
+	@RequestMapping("/boardDetail.cls")
+	public ModelAndView boardDetail(HttpServletRequest req, ModelAndView mv, BoardVO bVO, PageUtil page) {
+		bSrvc.getDetail(req, mv, bVO);
+		mv.addObject("PAGE", page);
+		return mv;
+	}
+	
+	// 게시판 상세보기 처리
+	@RequestMapping("/boardDetailProc.cls")
+	public ModelAndView detailProc(HttpServletRequest req, ModelAndView mv, PageUtil page, BoardVO bVO) {
+		
 		return mv;
 	}
 }

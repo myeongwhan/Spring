@@ -59,3 +59,21 @@
 	뷰		:	board/boardWrite.jsp
 				redirect- /cls/member/login.cls
 -------------------------------------------------------------
+# 게시판 글쓰기 처리 요청
+
+	요청내용	:	/cls/board/boardWriteProc.cls
+	파라미터	:	nowPage( ==> PageUtil.nowPage ), BoardVO, ProfileVO
+	컨트롤러	:	com.increpas.cls.controller.board.Board
+	처리함수	:	Board.boardWriteProc()
+	뷰		:	redirect- /cls/board/boardWrite.cls	- 실패
+				redirect- /cls/board/boardList.cls	- 성공
+-------------------------------------------------------------
+# 게시글 상세보기 요청
+
+	요청내용	:	/cls/board/boardDetail.cls
+	파라미터	:	nowPage( ==> PageUtil.nowPage ), bno(BoardVO)
+	컨트롤러	:	com.increpas.cls.controller.board.Board
+	처리함수	:	Board.boardDetail()
+	뷰		:	board/boardDetail.jsp
+				redirect- /cls/member/login.cls
+-------------------------------------------------------------

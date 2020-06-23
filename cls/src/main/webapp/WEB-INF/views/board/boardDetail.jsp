@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판상세보기</title>
-    <link rel="stylesheet" href="/clsProj/css/w3.css">
+    <link rel="stylesheet" href="/cls/css/w3.css">
 <style>
     
 </style>
@@ -17,28 +17,15 @@
 			$('#frm').submit();
 		});
 		$('#home').click(function(){
-			$(location).attr('href', '/clsProj/main.cls');
+			$(location).attr('href', '/cls/main.cls');
 		});
 	});
 </script>
 </head>
 <body>
-	<form method="post" action="/clsProj/board/board.cls" id="frm">
-		<input type="hidden" name="nowPage" id="nowPage" value="${nowPage }">
+	<form method="post" action="/cls/board/boardList.cls" id="frm">
+		<input type="hidden" name="nowPage" id="nowPage" value="${PAGE.nowPage }">
 		<input type="hidden" name="bno" value="${DATA.bno }">
-		<input type="hidden" name="title" value="${DATA.title }">
-		<input type="hidden" name="body" value="${DATA.body }">
-		<input type="hidden" name="name" value="${DATA.name }">
-		<input type="hidden" name="click" value="${DATA.click }">
-		<input type="hidden" name="sdate" value="${DATA.sdate }">
-		
-		<c:if test="${DATA.file.get(0).bino ne 0 }">
-			<c:forEach var="data" items="${DATA.file }">
-			<input type="hidden" name="bino" value="${data.bino }">
-			<input type="hidden" name="oriname" value="${data.oriname }">
-			<input type="hidden" name="savename" value="${data.savename }">
-			</c:forEach>
-		</c:if>
 	</form>
     <div class="w3-content" style="max-width: 1000px;">
         <div class="w3-center w3-col ">
@@ -51,7 +38,7 @@
             </div>
             <div class="w3-row w3-margin-top">
                 <div class="w3-card w3-padding w3-center">
-                    <h2>${DATA.title }</h2>
+                    <h2>${LIST.get(0).title }</h2>
                 </div>
             </div>
             <div class="w3-row w3-margin-top">
@@ -59,18 +46,18 @@
                     <div style="display: flex;">
                         <div class="w3-margin-right" style="display: flex;">
                             <p class="w3-margin-right">작성자:</p>
-                            <p class="w3-border-right" style="height: 25px; padding-right: 20px;">${DATA.name }</p>        
+                            <p class="w3-border-right" style="height: 25px; padding-right: 20px;">${LIST.get(0).name }</p>        
                         </div>
                         <div class="w3-margin-right" style="display: flex;">
                             <p class="w3-margin-right">작성일:</p>
-                            <p class="w3-border-right" style="height: 25px; padding-right: 20px;">${DATA.sdate }</p>        
+                            <p class="w3-border-right" style="height: 25px; padding-right: 20px;">${LIST.get(0).sdate }</p>        
                         </div>     
                     </div>
                     <div style="display: flex;">                        
-                        <c:if test="${not empty DATA.file}">
+                        <c:if test="${not empty LIST}">
 	                        <p class="w3-margin-right" style="margin-top: 0px;">파일다운</p>                     
-	                        <c:forEach var="pic" items="${DATA.file }" varStatus="st">
-	                        	<a class="w3-margin-right" href="/clsProj/brdimg/${pic.savename }">링크${st.count }</a>                                                   
+	                        <c:forEach var="pic" items="${LIST }" varStatus="st">
+	                        	<a href="/cls/upload/${pic.savename }"><img class="w3-margin-right" src="/cls/upload/${pic.savename }" style="width: auto; height: 80px;"></a>                                                   
 	                        </c:forEach>
                         </c:if>
                     </div>
@@ -78,7 +65,7 @@
             </div>
             <div class="w3-row w3-margin-top">
                 <div class="w3-card w3-padding mih w3-margin-bottom" style="min-height: 700px;">
-                    <div>${DATA.body }</div>
+                    <div>${LIST.get(0).body }</div>
                 </div>
             </div>
         </div>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 
-	xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-						https://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/context 
-						http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 
@@ -18,7 +17,7 @@
 			2. 해당 스키마를 파싱(번역)할 수 있는 도구를 지정해야 한다
 	 -->
 	 <context:annotation-config />
-	 
+	 <tx:annotation-driven transaction-manager="transactionManager"/>
 	 <!-- 
 	 		bean 처리를 하기 위한 태그
 	 		
@@ -61,6 +60,11 @@
 	  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	  	<property name="dataSource" ref="dataSource" />
 	  	<property name="configLocation" value="classpath:/resources/mybatis-config.xml" />
+	  </bean>
+	  
+	  <!-- 트랜젝션 세팅 -->
+	  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  	<property name="dataSource" ref="dataSource" />
 	  </bean>
 	  
 	  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

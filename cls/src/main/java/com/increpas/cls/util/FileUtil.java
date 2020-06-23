@@ -1,6 +1,10 @@
 package com.increpas.cls.util;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,5 +53,39 @@ public class FileUtil {
 		}
 		
 		return oldName;
+	}
+	
+	// null인 파일? 삭제
+	public MultipartFile[] setArr(MultipartFile[] file) {
+		MultipartFile[] tmp = null;
+		List<MultipartFile> list = (List<MultipartFile>) Arrays.asList(file);
+		for(int i=0; i<file.length; i++) {
+			if(list.get(i) == null) list.remove(i);
+		}
+		tmp = (MultipartFile[])list.toArray();
+		return tmp;
+	}
+	
+	public String[] getSaveName(HttpSession session, MultipartFile[] file, String folder) {
+		String[] savename = new String[file.length];
+		String path = session.getServletContext().getRealPath("resources") + "/" + folder;
+		
+		for(int i=0; i<file.length; i++) {
+			String oriname = file[i].getOriginalFilename();
+			if(oriname != null || oriname.length() != 0) {
+				savename[i] = rename(path, oriname);
+			}
+			
+			// 파일 저장
+			try {
+				File refile = new File(path, savename[i]);
+				file[i].transferTo(refile);	// 서버에 업로드
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return savename;
+		
 	}
 }

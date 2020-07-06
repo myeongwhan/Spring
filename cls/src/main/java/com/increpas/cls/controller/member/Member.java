@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -26,6 +27,7 @@ import com.increpas.cls.dao.MemberDAO;
 import com.increpas.cls.home.HomeController;
 import com.increpas.cls.service.MemberService;
 import com.increpas.cls.service.ProfileService;
+import com.increpas.cls.util.FileUtil;
 import com.increpas.cls.vo.BoardVO;
 import com.increpas.cls.vo.MemberVO;
 import com.increpas.cls.vo.ProfileVO;
@@ -39,6 +41,8 @@ public class Member {
 	ProfileService profileSrvc;
 	@Autowired
 	MemberService mSrvc;
+	@Autowired
+	FileUtil fileUtil;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -105,6 +109,12 @@ public class Member {
 		RedirectView rv = null;
 		if(cnt == 1) {
 			// 프로파일 정보를 데이터베이스에 저장한다
+			String path = session.getServletContext().getRealPath("resources") + "/profile";
+			String oriname = fVO.getFile()[0].getOriginalFilename();
+			if(oriname != null || oriname.length() != 0) {
+				fVO.setSavename(fileUtil.rename(path, oriname));
+			}
+			
 			int count = profileSrvc.addProfile(fVO, session);
 			if(count != 1) {
 				// 이 경우는 파일 정보 입력에 실패한 파일이 있는 경우이므로

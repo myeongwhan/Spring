@@ -23,7 +23,7 @@
 </script>
 </head>
 <body>
-	<form method="post" action="/clsProj/board/board.cls" id="frm">
+	<form method="post" action="/cls/board/board.cls" id="frm">
 		<input type="hidden" name="nowPage" id="nowPage" value="${nowPage }">
 		<input type="hidden" name="bno" value="${DATA.bno }">
 		<input type="hidden" name="title" value="${DATA.title }">
